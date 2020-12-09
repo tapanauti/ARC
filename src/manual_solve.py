@@ -10,14 +10,20 @@ import re
 ### result. Name them according to the task ID as in the three
 ### examples below. Delete the three examples. The tasks you choose
 ### must be in the data/training directory, not data/evaluation.
-def solve_0dfd9992(x):
+def solve_6f8cd79b(x):
+    for i in range(len(x[0])):
+        x[0][i] = 8
+        for j in range(len(x)):
+            x[j][-1] = 8
+            x[j][0] = 8
+        x[j][i] = 8
     return x
 
-def solve_b2862040(x):
-    return x
+# def solve_b2862040(x):
+#     return x
 
-def solve_05269061(x):
-    return x
+# def solve_05269061(x):
+#     return x
 
 
 def main():
@@ -39,7 +45,7 @@ def main():
 
     for ID, solve_fn in tasks_solvers:
         # for each task, read the data and call test()
-        directory = os.path.join("data", "training")
+        directory = os.path.join( "data", "training")
         json_filename = os.path.join(directory, ID + ".json")
         data = read_ARC_JSON(json_filename)
         test(ID, solve_fn, data)
@@ -92,4 +98,3 @@ def show_result(x, y, yhat):
     print(np.all(y == yhat))
 
 if __name__ == "__main__": main()
-
