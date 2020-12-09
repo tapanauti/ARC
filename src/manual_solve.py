@@ -3,7 +3,7 @@
 import os, sys
 import json
 import numpy as np
-import re
+import re,copy
 
 ### YOUR CODE HERE: write at least three functions which solve
 ### specific tasks by transforming the input x and returning the
@@ -11,13 +11,14 @@ import re
 ### examples below. Delete the three examples. The tasks you choose
 ### must be in the data/training directory, not data/evaluation.
 def solve_6f8cd79b(x):
-    for i in range(len(x[0])):
-        x[0][i] = 8
-        for j in range(len(x)):
-            x[j][-1] = 8
-            x[j][0] = 8
-        x[j][i] = 8
-    return x
+    y = copy.deepcopy(x)
+    for i in range(len(y[0])):
+        y[0][i] = 8
+        for j in range(len(y)):
+            y[j][-1] = 8
+            y[j][0] = 8
+        y[j][i] = 8
+    return y
 
 # def solve_b2862040(x):
 #     return x
@@ -76,6 +77,7 @@ def test(taskID, solve, data):
     train_input, train_output, test_input, test_output = data
     print("Training grids")
     for x, y in zip(train_input, train_output):
+        #print(x)
         yhat = solve(x)
         show_result(x, y, yhat)
     print("Test grids")
@@ -84,9 +86,9 @@ def test(taskID, solve, data):
         show_result(x, y, yhat)
 
         
-def show_result(x, y, yhat):
+def show_result(xi, y, yhat):
     print("Input")
-    print(x)
+    print(xi)
     print("Correct output")
     print(y)
     print("Our output")
