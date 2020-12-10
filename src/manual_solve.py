@@ -39,6 +39,14 @@ def solve_8a004b2b(x):
     
 def solve_5bd6f4ac(x):
     z = copy.deepcopy(x)
+
+    y = []
+    for i in z[:3]:
+        for j in i[-3:]:
+            y.append(j)
+    z = np.array(y)
+    z = z.reshape(3,3)
+
     return z
 
 # def solve_05269061(x):
