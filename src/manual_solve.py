@@ -36,7 +36,8 @@ def solve_8a004b2b(x):
         for j in range(border[0][1],border[1][1] +1):
             y[i].append(x[i][j])
     return y
-    
+
+#example?  pushed by Patrick 
 def solve_5bd6f4ac(x):
     z = copy.deepcopy(x)
 
