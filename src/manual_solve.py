@@ -20,6 +20,23 @@ def solve_6f8cd79b(x):
         y[j][i] = 8
     return y
 
+def solve_8a004b2b(x):
+
+    z = copy.deepcopy(x)
+    border = []
+
+    for i in range(len(z)):
+        for j in range(len(z[0])):
+            if x[i][j] == 4 :
+                border.append([i,j])
+
+    y = [[] for i in range(border[0][0],border[2][0] +1)]
+
+    for i in range(border[0][0],border[2][0] + 1):
+        for j in range(border[0][1],border[1][1] +1):
+            y[i].append(x[i][j])
+    return y
+    
 def solve_5bd6f4ac(x):
     z = copy.deepcopy(x)
     return z
