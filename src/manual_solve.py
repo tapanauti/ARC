@@ -40,7 +40,6 @@ def solve_8a004b2b(x):
 #example?  pushed by Patrick 
 def solve_5bd6f4ac(x):
     z = copy.deepcopy(x)
-
     y = []
     for i in z[:3]:
         for j in i[-3:]:
@@ -52,7 +51,18 @@ def solve_5bd6f4ac(x):
 
 def solve_f76d97a5(x):
     z = copy.deepcopy(x)
+    
+    for e in z[0]:
+        if(e != 5):
+            other = e
 
+    for i in range(len(z)):
+        for j in range(len(z)):
+            if(z[i][j] != 5):
+                other = z[i][j]
+                z[i][j] = 0
+            else:
+                z[i][j] = other  
     return z
 
 # def solve_05269061(x):
