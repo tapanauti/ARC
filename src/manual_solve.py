@@ -21,7 +21,8 @@ def solve_6f8cd79b(x):
     return y
 
 def solve_5bd6f4ac(x):
-   return x
+    z = copy.deepcopy(x)
+    return z
 
 # def solve_05269061(x):
 #     return x
