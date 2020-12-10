@@ -66,8 +66,8 @@ def solve_f76d97a5(x):
                 z[i][j] = other  
     return z
 
-# def solve_05269061(x):
-#     return x
+ def solve_05269061(x):
+     return x
 
 
 def main():
