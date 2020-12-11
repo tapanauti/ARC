@@ -94,7 +94,7 @@ def solve_7b7f7511(x):
         sol_list.clear()
         half_way = int(x_axis/2)
         for i in range(half_way):
-            for j in range(len(z)):
+            for j in range(y_axis):
                 sol_list.append(z[i][j])
         z = np.array(sol_list)
         z = z.reshape(half_way, y_axis)
