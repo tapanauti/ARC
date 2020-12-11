@@ -65,6 +65,19 @@ def solve_f76d97a5(x):
             else:
                 z[i][j] = other  
     return z
+
+def solve_08ed6ac7(x):
+    z = copy.deepcopy(x)
+    colours = [1,2,3,4]
+    counter = 0
+
+    for i in range(len(z)):
+        for j in range(len(z)):
+            if(z[i][j] == 5):
+                for x in range(i,len(z)):
+                    z[x][j] = colours[counter]
+                counter += 1    
+    return z
     
 
 """ Incomplete Implementation
