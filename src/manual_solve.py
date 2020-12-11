@@ -66,29 +66,44 @@ def solve_f76d97a5(x):
                 z[i][j] = other  
     return z
     
-    
+
 """ Incomplete Implementation
 def solve_05269061(x):
     x = copy.deepcopy(x)
+    a = (0,3,6)
+    b = (1,4)
+    c = (2,5)
 
-    for i in range(len(x)):
-        for j in range(len(x)):
-            if(x[i][j] != 0):
-                if(j < 4):
-                    x[i][j+3] = x[i][j]
-                else:
-                    x[i][j-3] = x[i][j]
-
-    for j in range(len(x)):
+    for i in range(3):
         for i in range(len(x)):
-            if(x[i][j] != 0):
-                if(i < 4):
-                    x[i+3][j] = x[i][j]
-                else:
-                    x[i-3][j] = x[i][j]
-        
+            for j in range(len(x)):
+                if(x[i][j] != 0 and j in a):
+                    for ac in a :
+                        x[i][ac] = x[i][j]
+                elif(x[i][j] != 0 and j in b):
+                    for bc in b :
+                        x[i][bc] = x[i][j]
+                elif(x[i][j] != 0 and j in c):
+                    for cc in c :
+                        x[i][cc] = x[i][j]
+
+        for i in range(len(x)):
+            for j in range(len(x)):
+                if(x[j][i] != 0 and j in a):
+                    for ac in a :
+                        x[ac][i] = x[j][i]
+                elif(x[j][i] != 0 and j in b):
+                    for bc in b :
+                        x[bc][i] = x[j][i]
+                elif(x[j][i] != 0 and j in c):
+                    for cc in c :
+                        x[cc][i] = x[j][i]
+
+    
     return x
-"""
+    
+    """
+
 
 def main():
     # Find all the functions defined in this file whose names are
