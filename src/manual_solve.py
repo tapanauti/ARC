@@ -11,6 +11,7 @@ import re,copy
 ### examples below. Delete the three examples. The tasks you choose
 ### must be in the data/training directory, not data/evaluation.
 
+
 def solve_6f8cd79b(x):
     y = copy.deepcopy(x)
     for i in range(len(y[0])):
@@ -108,6 +109,52 @@ def solve_7b7f7511(x):
         z = z.reshape(half_way, x_axis)
 
     return z
+
+
+"""Incomplete - Still working on this
+def solve_feca6190(x):
+    x = copy.deepcopy(x)
+
+    #Get number of colours
+    colours = []
+    for c in x[0]:
+        if(c != 0):
+            colours.append(c)         
+    number_of_colours = len(colours)
+
+    #create a grid consisting of numpy array of zeros, with the dimensions equalling (5 x number_of_colours)    
+    grid_dimens = 5 * number_of_colours
+    grid = np.zeros((grid_dimens,grid_dimens),dtype = int)
+
+    #starting from bottom left of grid, place x array as first 5 colour values, incrementing by 1 as it rises
+    #up the rows of the grid
+
+
+
+    for e in range(grid_dimens-1,0,-1):
+        #grid[e][0] = 5
+        for i in range(len(x[0])):
+            grid[e][i] = x[0][i]
+
+        #end -=1     
+        
+        
+        #for k in range(i,grid_dimens): 
+         #   for j in range(grid_dimens,0):
+          #      grid[j][k] = x[0][i]
+
+              #  grid[10][k] = x[0][i]
+               # test -= 1
+
+    #for i in range(len(grid[0])):
+     #   grid[i] = 5
+    #print((x[0]))
+    #x = grid
+    
+    return grid
+"""
+    
+
 
 
 """ Incomplete Implementation
