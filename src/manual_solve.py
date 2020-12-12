@@ -157,7 +157,7 @@ def solve_d0f5fe59(x):
 
     return grid
 
-print(grid) 
+
 """Incomplete - Still working on this
 def solve_feca6190(x):
     x = copy.deepcopy(x)
