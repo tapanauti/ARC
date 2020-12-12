@@ -23,6 +23,7 @@ def solve_6f8cd79b(x):
         y[j][i] = 8
     return y
 
+"""
 def solve_8a004b2b(x):
 
     z = copy.deepcopy(x)
@@ -40,7 +41,7 @@ def solve_8a004b2b(x):
             y[i].append(x[i][j])
     return y
 
-
+"""
 
 #example?  pushed by Patrick 
 def solve_5bd6f4ac(x):
@@ -148,6 +149,8 @@ def solve_feca6190(x):
 
     return grid
 
+
+
 def solve_d0f5fe59(x):
 
     a, y = label(x)
@@ -158,88 +161,49 @@ def solve_d0f5fe59(x):
     return grid
 
 
-"""Incomplete - Still working on this
-def solve_feca6190(x):
+    
+
+def solve_ded97339(x):
     x = copy.deepcopy(x)
 
-    #Get number of colours
-    colours = []
-    for c in x[0]:
-        if(c != 0):
-            colours.append(c)         
-    number_of_colours = len(colours)
-
-    #create a grid consisting of numpy array of zeros, with the dimensions equalling (5 x number_of_colours)    
-    grid_dimens = 5 * number_of_colours
-    grid = np.zeros((grid_dimens,grid_dimens),dtype = int)
-
-    #starting from bottom left of grid, place x array as first 5 colour values, incrementing by 1 as it rises
-    #up the rows of the grid
-
-
-
-    for e in range(grid_dimens-1,0,-1):
-        #grid[e][0] = 5
-        for i in range(len(x[0])):
-            grid[e][i] = x[0][i]
-
-        #end -=1     
+    #iterating over rows in x. If there are two instances of 8 (light blue) draw a "line" between them in a different
+    # "colour" In 
+    x_list = []
+    for row in x:
+        for index,item in enumerate(row): 
+            if (item == 8):
+                x_list.append(index)
         
+        if(len(x_list) == 2): # If there are two "8"s in row, get their indices and draw a line between them
+            a = x_list[0]
+            b = x_list[1]
+            for i in range(a+1,b):
+                    row[i] = 2 # 2 just represents an arbitrary colour. It can be any value apart from 0 and 8
+        x_list.clear()
+
+    #Same procedure as the iterating over X axis, except this time iterate down through columns
+    y_list = []
+    for column in x.T:
+        for index,item in enumerate(column):
+            if (item == 8):
+                y_list.append(index)
+
+        if(len(y_list) == 2):
+            a = y_list[0]
+            b = y_list[1]
+            for i in range(a+1,b):
+                    column[i] = 2
+        y_list.clear()
         
-        #for k in range(i,grid_dimens): 
-         #   for j in range(grid_dimens,0):
-          #      grid[j][k] = x[0][i]
+    #changing all elements with the arbitrary placeholder value into 8s again
+    for i in range(len(x)):
+        for j in range(len(x[0])):
+            if(x[i][j]==2):
+                x[i][j] = 8
 
-              #  grid[10][k] = x[0][i]
-               # test -= 1
-
-    #for i in range(len(grid[0])):
-     #   grid[i] = 5
-    #print((x[0]))
-    #x = grid
-    
-    return grid
-"""
-    
-
-
-
-""" Incomplete Implementation
-def solve_05269061(x):
-    x = copy.deepcopy(x)
-    a = (0,3,6)
-    b = (1,4)
-    c = (2,5)
-
-    for i in range(3):
-        for i in range(len(x)):
-            for j in range(len(x)):
-                if(x[i][j] != 0 and j in a):
-                    for ac in a :
-                        x[i][ac] = x[i][j]
-                elif(x[i][j] != 0 and j in b):
-                    for bc in b :
-                        x[i][bc] = x[i][j]
-                elif(x[i][j] != 0 and j in c):
-                    for cc in c :
-                        x[i][cc] = x[i][j]
-
-        for i in range(len(x)):
-            for j in range(len(x)):
-                if(x[j][i] != 0 and j in a):
-                    for ac in a :
-                        x[ac][i] = x[j][i]
-                elif(x[j][i] != 0 and j in b):
-                    for bc in b :
-                        x[bc][i] = x[j][i]
-                elif(x[j][i] != 0 and j in c):
-                    for cc in c :
-                        x[cc][i] = x[j][i]
-
-    
     return x
-    
-    """
+
+   
 
 
 def main():
