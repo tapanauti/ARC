@@ -4,6 +4,7 @@ import os, sys
 import json
 import numpy as np
 import re,copy
+from scipy.ndimage import label
 
 ### YOUR CODE HERE: write at least three functions which solve
 ### specific tasks by transforming the input x and returning the
@@ -147,6 +148,16 @@ def solve_feca6190(x):
 
     return grid
 
+def solve_d0f5fe59(x):
+
+    a, y = label(x)
+
+    grid = np.zeros((y,y),dtype = int )
+    np.fill_diagonal(grid,8)
+
+    return grid
+
+print(grid) 
 """Incomplete - Still working on this
 def solve_feca6190(x):
     x = copy.deepcopy(x)
