@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
-#Name: Patrick Garrett, ID: 01571095
-
+# Name(s): Patrick Garrett, Tapan Auti
+# ID: 01571095 , 20231499
+# Git Link(s):   , "https://github.com/tapanauti/ARC"
 import os, sys
 import json
 import numpy as np
@@ -15,36 +16,42 @@ from scipy.ndimage.morphology import grey_dilation
 ### examples below. Delete the three examples. The tasks you choose
 ### must be in the data/training directory, not data/evaluation.
 
+# IMP - as python uses referencing and does not actually copy the values,
+#so to use the passed x for solve functions here everywhere we have made a deepcopy of x to solve the problem.
+
+"""6f8cd79b : The task grid is a 7 x 6 grid with all blocks black,
+ the solution is a grid of same size which has the blocks on border of the grid filled with cyan color.
 """
 def solve_6f8cd79b(x):
-    y = copy.deepcopy(x)
-    for i in range(len(y[0])):
-        y[0][i] = 8
-        for j in range(len(y)):
-            y[j][-1] = 8
+    y = copy.deepcopy(x)                
+    for i in range(len(y[0])):             #iterating through the y-axis
+        y[0][i] = 8                        #filling the top border with desired color
+        for j in range(len(y)):            #iterating through the y-axis
+            y[j][-1] = 8                   #filling the right border and left border respectively
             y[j][0] = 8
-        y[j][i] = 8
+        y[j][i] = 8                        #fillin gthe bottom border
     return y
 
-
+"""8a004b2b: The task grid here is a around 19 x 18 grid, 
+ the solution grid is depending upon the values in input grid i.e the subgrid consisting of all four corners in yellow  """
 def solve_8a004b2b(x):
 
     z = copy.deepcopy(x)
     border = []
-
-    for i in range(len(z)):
+                                                            # function for iterating over x and y axis and if block of yellow found store it in a list.
+    for i in range(len(z)):                                 
         for j in range(len(z[0])):
             if x[i][j] == 4 :
                 border.append([i,j])
 
     y = [[] for i in range(border[0][0],border[2][0] +1)]
 
-    for i in range(border[0][0],border[2][0] + 1):
+    for i in range(border[0][0],border[2][0] + 1):          # printing the grid from input with the yellow corners. 
         for j in range(border[0][1],border[1][1] +1):
             y[i].append(x[i][j])
     return y
 
-"""
+
 
 """5bd6f4ac: The 9x9 task grid is composed of  apparently random coloured squares
  The solution is a 3x3 grid of squares in the top right corner of the task matrix, 
@@ -167,17 +174,17 @@ def solve_feca6190(x):
     return grid
 
 
-
+"""d0f5fe59: The task grid is a grid with random shapes in cyan color and the output will be a grid of size where size equals number of non-connected shapes in input grid """
 def solve_d0f5fe59(x):
 
-    a, y = label(x)
+    a, y = label(x)                         # scipy 'nd image' has a function 'label' which returns the connected blocks as label in the grid and the labelled grid itself.
 
-    grid = np.zeros((y,y),dtype = int )
-    np.fill_diagonal(grid,8)
+    grid = np.zeros((y,y),dtype = int )     # the number of labels will be the no of non-connected shapes in the grid.
+    np.fill_diagonal(grid,8)                # this will fill the diagonal in a ndarray with the desired values in our case color cyan.
 
     return grid
 
-"""The task grid is composed of a small number of dispersed cyan-coloured squares with the remaining squares black. The task is solved by assessing if any two cyan squares are on the same row or column and, if so, colouring in the intermediate squares cyan.  """
+"""ded97339: The task grid is composed of a small number of dispersed cyan-coloured squares with the remaining squares black. The task is solved by assessing if any two cyan squares are on the same row or column and, if so, colouring in the intermediate squares cyan.  """
 def solve_ded97339(x):
     x = copy.deepcopy(x)
 
