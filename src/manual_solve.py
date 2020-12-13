@@ -5,6 +5,7 @@ import json
 import numpy as np
 import re,copy
 from scipy.ndimage import label
+from scipy.ndimage.morphology import grey_dilation
 
 ### YOUR CODE HERE: write at least three functions which solve
 ### specific tasks by transforming the input x and returning the
@@ -12,7 +13,7 @@ from scipy.ndimage import label
 ### examples below. Delete the three examples. The tasks you choose
 ### must be in the data/training directory, not data/evaluation.
 
-
+"""
 def solve_6f8cd79b(x):
     y = copy.deepcopy(x)
     for i in range(len(y[0])):
@@ -23,7 +24,7 @@ def solve_6f8cd79b(x):
         y[j][i] = 8
     return y
 
-"""
+
 def solve_8a004b2b(x):
 
     z = copy.deepcopy(x)
@@ -41,7 +42,7 @@ def solve_8a004b2b(x):
             y[i].append(x[i][j])
     return y
 
-"""
+
 
 #example?  pushed by Patrick 
 def solve_5bd6f4ac(x):
@@ -113,13 +114,15 @@ def solve_7b7f7511(x):
         z = z.reshape(half_way, x_axis)
 
     return z
-
+"""
 # saw the code incomplete so implemented it in my way, its working if we have to use this. - tapan
 def solve_feca6190(x):
     x = copy.deepcopy(x)
     #Get number of colours
+    y = x.tolist()
+    #print(x)
     colours = []
-    for c in x[0]:
+    for c in y[0]:
         if(c != 0):
             colours.append(c)         
     number_of_colours = len(colours)
@@ -132,17 +135,17 @@ def solve_feca6190(x):
 
     #below this tried to implement the code - tapan
     # add balck color to x array to make its size same as grid
-    for i in range(grid_dimens - len(x[0]) ):
-        x[0].append(0)
+    for i in range(grid_dimens - len(y[0]) ):
+        y[0].append(0)
 
     #  using a lot comments so you can understand what i haveimpemented - tapan
 
     a = 0 # lower range for incrementing the loop on x axis
-    b = len(x[0]) # upper range for loop x axis
+    b = len(y[0]) # upper range for loop x axis
     z= 0 # to take the value from x and insert into grid
     for i in range(len(grid)-1,-1,-1): # traversing the grid in reverse order 9 - 0
         for j in range(a,b): # traversing on the x axis
-            grid[i][j] = x[0][z] # inserting from x diagonally into grid
+            grid[i][j] = y[0][z] # inserting from x diagonally into grid
             z +=1 # with every incremnet in x axis increment the x index to insert color diagonally
         a +=1 # with every increment start from 1 position next at x axis
         z = 0 # at every y axis iteration initialse x pointer to 0
@@ -150,7 +153,7 @@ def solve_feca6190(x):
     return grid
 
 
-
+"""
 def solve_d0f5fe59(x):
 
     a, y = label(x)
@@ -203,7 +206,7 @@ def solve_ded97339(x):
 
     return x
 
-   
+ """  
 
 
 def main():
