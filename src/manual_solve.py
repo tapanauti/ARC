@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+#Name: Patrick Garrett, ID: 01571095
+
 import os, sys
 import json
 import numpy as np
@@ -42,71 +44,81 @@ def solve_8a004b2b(x):
             y[i].append(x[i][j])
     return y
 
+"""
 
-
-#example?  pushed by Patrick 
+"""5bd6f4ac: The 9x9 task grid is composed of  apparently random coloured squares
+ The solution is a 3x3 grid of squares in the top right corner of the task matrix, 
+ i.e. the final three elements of each of the first three rows of the grid."""
 def solve_5bd6f4ac(x):
     z = copy.deepcopy(x)
-    y = []
-    for i in z[:3]:
-        for j in i[-3:]:
-            y.append(j)
-    z = np.array(y)
-    z = z.reshape(3,3)
+    y = [] # holding list
+    for i in z[:3]:             #iterating through slice of first 3 rows
+        for j in i[-3:]:        #iterating through slice last three columns
+            y.append(j)         #adding values to list
+    z = np.array(y)             #re-assigning z as a numpy array composed y 
+    z = z.reshape(3,3)          #re-shaping z into a 3x3 grid
 
     return z
 
-#not the best solution - I might change
+
+"""f76d97a5: The task grids include a pattern of grey squares with the remaining squares a secondary colour. 
+It is solved by changing the colour of the grey squares to the secondary colour and changing the 
+squares of the secondary colour to black. """
 def solve_f76d97a5(x):
     z = copy.deepcopy(x)
     
-    for e in z[0]:
-        if(e != 5):
+    for e in z[0]:                  #iterating through the first row of the grid to identify the secondary colour value
+        if(e != 5):                 # i.e. the colour that isn't grey (5). 
             other = e
 
     for i in range(len(z)):
-        for j in range(len(z)):
-            if(z[i][j] != 5):
+        for j in range(len(z)):      #Iterating through all squares in the grid
+            if(z[i][j] != 5):        # If the square is secondary colourv value, change its colour value to black (0)
                 other = z[i][j]
                 z[i][j] = 0
             else:
-                z[i][j] = other  
+                z[i][j] = other      # else, if the square is grey, change its colour value to that of the secondary colour
     return z
 
+"""08ed6ac7: The task grids are composed of four “towers” of grey squares of varying heights, with the remaining 
+squares in black. The task is solved by recolouring the tallest tower blue, the second-tallest red, 
+third-tallest green, and the shortest yellow."""
 def solve_08ed6ac7(x):
     z = copy.deepcopy(x)
-    colours = [1,2,3,4]
-    counter = 0
+    colours = [1,2,3,4]                     #The list of colours, blue, red, green, yellow
+    counter = 0                             #counter value for identifying element in colour list
 
-    for i in range(len(z)):
-        for j in range(len(z)):
-            if(z[i][j] == 5):
-                for x in range(i,len(z)):
+    for i in range(len(z)):                     #Iterating downward through the grid, left to right
+        for j in range(len(z)):                  
+            if(z[i][j] == 5):                   # If a square is grey, iterate down that column and assign 
+                for x in range(i,len(z)):       # it a value of the next colour in the list
                     z[x][j] = colours[counter]
-                counter += 1    
+                counter += 1                    #increment the counter for the values in the colour list
     return z
 
 
-#Solution perhaps not totally robust. I might change it
+"""7b7f7511: The task grid is composed of a pattern of coloured squares that repeats once, either horizontally 
+(if row length in the grid is longer than column length) or vertically (if columns are longer than rows). 
+It is solved by extracting the repeating pattern."""
 def solve_7b7f7511(x):
     z = copy.deepcopy(x)
-    x_axis = len(z[0])
+    x_axis = len(z[0])                      #Identify length of grid rows and grid columns
     y_axis = len(z)
     half_way = 0
     sol_list = []
 
 
-    if (x_axis > y_axis):
+    if (x_axis > y_axis):                    #If rows are longer than columns
         sol_list.clear()
-        half_way = int(x_axis/2)
+        half_way = int(x_axis/2)             #getting value for half the row length
         for i in range(half_way):
-            for j in range(y_axis):
-                sol_list.append(z[i][j])
-        z = np.array(sol_list)
-        z = z.reshape(half_way, y_axis)
+            for j in range(y_axis):           
+                sol_list.append(z[i][j])#for each row and column in that half of the grid, add their values to the solution list
+        z = np.array(sol_list)          #reassign z as a numpy array of solution list
+        z = z.reshape(half_way, y_axis) #re-shape z according the dimension based on half of row length
     else:
-        half_way = int(y_axis/2)
-        sol_list.clear()
+        half_way = int(y_axis/2)          # If column length is longer, repeat the above procedure, but
+        sol_list.clear()                  # on the y axis instead of x axis
         for i in range(half_way):
             for j in range(x_axis):
                 sol_list.append(z[i][j])
@@ -114,46 +126,48 @@ def solve_7b7f7511(x):
         z = z.reshape(half_way, x_axis)
 
     return z
-"""
-# saw the code incomplete so implemented it in my way, its working if we have to use this. - tapan
+
+"""feca6190: The task grid is one row of 5 squares. Some squares are coloured and the rest are black. 
+The solution is a grid with dimensions of the n x n (n being the number of coloured squares in the task).
+Within the solution grid, the task row of 5 values is repeated on every row,starting from the bottom
+row of grid, with the starting element of this pattern incremented with each row up in the grid."""
 def solve_feca6190(x):
-    x = copy.deepcopy(x)
-    #Get number of colours
+    x = copy.deepcopy(x)  
     y = x.tolist()
-    #print(x)
-    colours = []
+    number_of_colours = 0
     for c in y[0]:
         if(c != 0):
-            colours.append(c)         
-    number_of_colours = len(colours)
+            number_of_colours += 1 #Get number of colours
+                    
+
 
     #create a grid consisting of numpy array of zeros, with the dimensions equalling (5 x number_of_colours)    
     grid_dimens = 5 * number_of_colours
     grid = np.zeros((grid_dimens,grid_dimens),dtype = int)
+   
+   
     #starting from bottom left of grid, place x array as first 5 colour values, incrementing by 1 as it rises
     #up the rows of the grid
-
-    #below this tried to implement the code - tapan
-    # add balck color to x array to make its size same as grid
+    #add balck color to x array to make its size same as grid
     for i in range(grid_dimens - len(y[0]) ):
         y[0].append(0)
 
-    #  using a lot comments so you can understand what i haveimpemented - tapan
 
-    a = 0 # lower range for incrementing the loop on x axis
-    b = len(y[0]) # upper range for loop x axis
-    z= 0 # to take the value from x and insert into grid
-    for i in range(len(grid)-1,-1,-1): # traversing the grid in reverse order 9 - 0
-        for j in range(a,b): # traversing on the x axis
-            grid[i][j] = y[0][z] # inserting from x diagonally into grid
-            z +=1 # with every incremnet in x axis increment the x index to insert color diagonally
-        a +=1 # with every increment start from 1 position next at x axis
-        z = 0 # at every y axis iteration initialse x pointer to 0
+
+    a = 0               #lower range for incrementing the loop on x axis
+    b = len(y[0])       # upper range for loop x axis
+    z= 0                # to take the value from x and insert into grid
+    for i in range(len(grid)-1,-1,-1):      # traversing the grid in reverse order 9 - 0
+        for j in range(a,b):                # traversing on the x axis
+            grid[i][j] = y[0][z]            # inserting from x diagonally into grid
+            z +=1               # with every increment in x axis increment the x index to insert color diagonally
+        a +=1                   # with every increment start from 1 position next at x axis
+        z = 0                   # at every y axis iteration initialse x pointer to 0
 
     return grid
 
 
-"""
+
 def solve_d0f5fe59(x):
 
     a, y = label(x)
@@ -163,30 +177,28 @@ def solve_d0f5fe59(x):
 
     return grid
 
-
-    
-
+"""The task grid is composed of a small number of dispersed cyan-coloured squares with the remaining squares black. The task is solved by assessing if any two cyan squares are on the same row or column and, if so, colouring in the intermediate squares cyan.  """
 def solve_ded97339(x):
     x = copy.deepcopy(x)
 
-    #iterating over rows in x. If there are two instances of 8 (light blue) draw a "line" between them in a different
-    # "colour" In 
+    #iterating over rows in x. If there are two instances of 8 (cyan) draw a "line" between them in a different
+    # "colour". 
     x_list = []
     for row in x:
-        for index,item in enumerate(row): 
+        for index,item in enumerate(row):       #finding both items and their indices within each row
             if (item == 8):
-                x_list.append(index)
+                x_list.append(index)            #list of indices of occurences of 8 (cyan) in each row
         
-        if(len(x_list) == 2): # If there are two "8"s in row, get their indices and draw a line between them
-            a = x_list[0]
-            b = x_list[1]
+        if(len(x_list) == 2): # If there are two "8"s in a particular row, get their indices and draw a line between them
+            a = x_list[0]       #index of first 8
+            b = x_list[1]       #index of second 8
             for i in range(a+1,b):
                     row[i] = 2 # 2 just represents an arbitrary colour. It can be any value apart from 0 and 8
         x_list.clear()
 
     #Same procedure as the iterating over X axis, except this time iterate down through columns
     y_list = []
-    for column in x.T:
+    for column in x.T:          #x.T is tranposed version of x - columns become rows and vice versa
         for index,item in enumerate(column):
             if (item == 8):
                 y_list.append(index)
@@ -206,7 +218,7 @@ def solve_ded97339(x):
 
     return x
 
- """  
+  
 
 
 def main():
