@@ -3,12 +3,13 @@
 # Name(s): Patrick Garrett, Tapan Auti
 # ID: 01571095 , 20231499
 # Git Link(s):   , "https://github.com/tapanauti/ARC"
+
+
 import os, sys
 import json
 import numpy as np
 import re,copy
 from scipy.ndimage import label
-from scipy.ndimage.morphology import grey_dilation
 
 ### YOUR CODE HERE: write at least three functions which solve
 ### specific tasks by transforming the input x and returning the
